@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
+header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
 
 Route::post('customers','App\Http\Controllers\CustomersController@paginate');
+Route::get('customers','App\Http\Controllers\CustomersController@paginate');
 Route::get('customers/averagelastday','App\Http\Controllers\CustomersController@getTodayAverage');
 Route::get('customers/averagelastweek','App\Http\Controllers\CustomersController@getLastWeekAverage');
 Route::get('customers/averagelastmonth','App\Http\Controllers\CustomersController@getLastMonthAverage');
@@ -23,7 +27,7 @@ Route::get('customers/averagelastthreemonths','App\Http\Controllers\CustomersCon
 Route::get('customers/averagelastyear','App\Http\Controllers\CustomersController@getLastYearAverage');
 
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/users', function (Request $request) {
     return $request->user();
 });
 
@@ -35,7 +39,7 @@ Route::group([],function () {
       'middleware' => 'auth:api'
     ], function() {
         Route::get('logout', 'App\Http\Controllers\AuthController@logout');
-        Route::get('user', 'App\Http\Controllers\AuthController@user');
+        Route::get('users', 'App\Http\Controllers\AuthController@user');
     });
 });
 
