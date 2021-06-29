@@ -43,3 +43,6 @@ Route::group([],function () {
     });
 });
 
+Route::get('recaptchacreate', 'RecaptchaController@create');
+Route::post('store', 'RecaptchaController@store');
+
